@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.netflix.logging.log4jAdapter;
+package com.netflix.logging.log4jadapter;
 
 import org.apache.log4j.PatternLayout;
 import org.apache.log4j.helpers.PatternParser;
