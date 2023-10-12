@@ -82,18 +82,18 @@ public class LoggingConfiguration implements PropertyListener {
     private static final String ASYNC_APPENDERNAME_SUFFIX = "_ASYNC";
     private static final String ROOT_CATEGORY = "rootCategory";
     private static final String ROOT_LOGGER = "rootLogger";
-    
-    private Map<String, String> originalAsyncAppenderNameMap = new HashMap<String, String>();
+
+    private final Map<String, String> originalAsyncAppenderNameMap = new HashMap<>();
     private BlitzConfig blitz4jConfig;
-    private Properties initialProps = new Properties();
-    private Properties overrideProps = new Properties();
+    private final Properties initialProps = new Properties();
+    private final Properties overrideProps = new Properties();
     private final ExecutorService executorPool;
     private final AtomicInteger pendingRefreshes = new AtomicInteger();
     private final AtomicInteger refreshCount = new AtomicInteger();
     private Logger logger;
     private static final int MIN_DELAY_BETWEEN_REFRESHES = 200;
     private static final CharSequence PROP_LOG4J_ASYNC_APPENDERS = "log4j.logger.asyncAppenders";
-    private static LoggingConfiguration instance = new LoggingConfiguration();
+    private static final LoggingConfiguration instance = new LoggingConfiguration();
 
     protected LoggingConfiguration() {
         this.executorPool = Executors.newCachedThreadPool(
@@ -127,7 +127,7 @@ public class LoggingConfiguration implements PropertyListener {
         NFHierarchy nfHierarchy = null;
         
         // Make log4j use blitz4j implementations
-        if ((!NFHierarchy.class.equals(LogManager.getLoggerRepository().getClass()))) {
+        if (!NFHierarchy.class.equals(LogManager.getLoggerRepository().getClass())) {
             nfHierarchy = new NFHierarchy(new NFRootLogger(org.apache.log4j.Level.INFO));
             org.apache.log4j.LogManager.setRepositorySelector(new NFRepositorySelector(nfHierarchy), guard);
         }
